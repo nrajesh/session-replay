@@ -327,7 +327,7 @@ const INDEX_JS = `
     if(r&&!a.hasAttribute('data-peek'))a.setAttribute('data-peek',JSON.stringify(peekObj(r)));
     var blk=a.closest('li,p')||box,seen=blk.srDates||(blk.srDates={});
     if(r&&!a.classList.contains('when')&&!seen[r.id]){seen[r.id]=1;var dt=document.createElement('span');dt.className='ans-date';dt.textContent=fd(r.start);var last=a;while(last.nextElementSibling&&last.nextElementSibling.tagName==='A'&&last.nextSibling===last.nextElementSibling||last.nextSibling&&/^\\s*,\\s*$/.test(last.nextSibling.textContent||'')&&last.nextSibling.nextSibling&&last.nextSibling.nextSibling.tagName==='A')last=last.nextSibling.tagName==='A'?last.nextSibling:last.nextSibling.nextSibling;last.after(dt);}
-    if(!r&&/^https:\\/\\/github\\.com\\/.+\\/(commit|pull)\\//.test(a.href)&&!a.hasAttribute('data-peek')){var pm=a.href.match(/\\/(commit|pull)\\/([\\w]+)/);a.setAttribute('data-peek',JSON.stringify({h:pm[1]==='pull'?'Pull request #'+pm[2]:'Commit '+pm[2].slice(0,7),g:'Opens on GitHub ↗'}));}
+    if(!r&&a.href.indexOf('https://github.com/')===0&&/\\/(commit|pull)\\//.test(a.href)&&!a.hasAttribute('data-peek')){var pm=a.href.match(/\\/(commit|pull)\\/([\\w]+)/);a.setAttribute('data-peek',JSON.stringify({h:pm[1]==='pull'?'Pull request #'+pm[2]:'Commit '+pm[2].slice(0,7),g:'Opens on GitHub ↗'}));}
     if(DATE_TEXT.test(a.textContent.trim()))a.classList.add('date-link');});}
   function e(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function hl(text,terms){var out=e(text);(terms||[]).forEach(function(t){if(t.length<3)return;
@@ -342,7 +342,7 @@ const INDEX_JS = `
       if(r.risk)sub.push('<span class="chip risk" title="Destructive commands the AI agent ran">'+r.risk+' risky</span>');
       if(r.gone)sub.push('<span class="chip plain" title="The original session file is gone. This copy stays in your archive.">Source removed</span>');
       if(r.decisions!=null)sub.push(r.decisions+' decision'+(r.decisions===1?'':'s'));else if(r.kind==='cloud')sub.push('<span class="chip plain">decisions N/A</span>');
-      if(r.prs)sub.push('PR '+(D.pro&&r.prLinks&&r.prLinks.length?r.prLinks.map(function(p){return /^https:\\/\\/github\\.com\\//.test(p.url)?'<a href="'+e(p.url)+'" rel="noreferrer" data-peek="'+e(JSON.stringify({h:'Pull request #'+p.n,s:r.project,g:'Opens on GitHub ↗'}))+'">#'+p.n+'</a>':'#'+p.n;}).join(' '):e(r.prs)));
+      if(r.prs)sub.push('PR '+(D.pro&&r.prLinks&&r.prLinks.length?r.prLinks.map(function(p){return p.url.indexOf('https://github.com/')===0?'<a href="'+e(p.url)+'" rel="noreferrer" data-peek="'+e(JSON.stringify({h:'Pull request #'+p.n,s:r.project,g:'Opens on GitHub ↗'}))+'">#'+p.n+'</a>':'#'+p.n;}).join(' '):e(r.prs)));
       if(r.prCommentsCount&&r.prCommentsCount>0)sub.push('<span class="chip cloud" title="PR comments">'+r.prCommentsCount+' comments</span>');
       if(r.manualCommitsCount&&r.manualCommitsCount>0)sub.push('<span class="chip plain" title="Commits not linked to an archived session">'+r.manualCommitsCount+' manual</span>');
       if(r.prChecks&&r.prChecks.length){var last=r.prChecks[r.prChecks.length-1],dot=last.status==='success'||last.status==='completed'?'ok':last.status==='failure'||last.status==='error'?'bad':'warn';sub.push('<span class="dot '+dot+'" title="CI: '+e(last.status)+'"></span>'+last.status);
