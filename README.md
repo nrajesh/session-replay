@@ -69,7 +69,7 @@ On a phone:
 
 ## Pro
 
-Pro is coming soon, with a one-time price and an early-access discount. Want it? Say hello in [Discussions](https://github.com/nrajesh/session-replay/discussions) and you will hear first.
+Pro is coming soon, with a one-time price and an early-access discount. Want it? Comment on [Pro early access](https://github.com/nrajesh/session-replay/discussions/1) and you will hear first.
 
 ## Settings
 
