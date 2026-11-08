@@ -1,0 +1,23 @@
+#!/bin/sh
+set -eu
+
+case "$0" in
+  */*) bin_dir=${0%/*} ;;
+  *) bin_dir=. ;;
+esac
+plugin_root=$(CDPATH= cd -- "$bin_dir/.." && pwd)
+install_hint='Install it with Homebrew (brew install node) or from the Node.js website, then start a new Claude Code session.'
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "Session Replay needs Node.js 24 or newer, and it was not found. $install_hint" >&2
+  exit 1
+fi
+node_major=$(node -p 'Number(process.versions.node.split(".")[0])')
+if [ "$node_major" -lt 24 ]; then
+  echo "Session Replay needs Node.js 24 or newer (found $(node --version)). $install_hint" >&2
+  exit 1
+fi
+
+data_home=${XDG_DATA_HOME:-"$HOME/.local/share"}
+export SESSION_REPLAY_OUT=${SESSION_REPLAY_OUT:-"$data_home/session-replay/replays"}
+exec node "$plugin_root/src/cli.ts" "$@"

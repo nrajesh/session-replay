@@ -11,7 +11,7 @@ export function legalArticle(year: number, prefix = '', pro = false): string {
   let others = '<li><strong>Other services.</strong> When you use Claude Code with Session Replay, its terms apply.</li>';
   let summaries = '<li><strong>Decisions can be wrong.</strong> Best-effort decisions are read from your messages. Check the linked session before relying on them.</li>';
   let proPrivacy = '';
-  let removing = '<li><strong>Removing everything.</strong> Delete the pages folder to remove all pages and caches. Nothing else is kept.</li>';
+  let removing = '<li><strong>Removing everything.</strong> Delete the pages folder to remove all pages and caches. Uninstall the plugin to stop automatic updates.</li>';
   return `<article class="legal">
 <section id="${prefix}terms" aria-labelledby="${prefix}terms-title">
 <h2 id="${prefix}terms-title">Terms of use</h2>

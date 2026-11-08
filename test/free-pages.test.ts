@@ -39,5 +39,5 @@ test('free terms and privacy only describe what Free does', async () => {
   assert.match(html, /it stays there\.<\/p>/);
   const text = html.slice(html.indexOf('<article class="legal">'), html.indexOf('</article>'));
   assert.doesNotMatch(text, /\(Pro\)|press Ask|serve|uninstall-hook|Codex/);
-  assert.match(text, /Delete the pages folder to remove all pages and caches\. Nothing else is kept\./);
+  assert.match(text, /Uninstall the plugin to stop automatic updates/);
 });

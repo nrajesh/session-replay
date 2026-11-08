@@ -19,14 +19,14 @@ In Claude Code, run:
 /plugin install session-replay@session-replay
 ```
 
-Then build your pages: type `/session-replay:update` in Claude Code, or just ask “update my session replays”.
-Claude runs the builder and gives you the link. Your pages live here:
+Then start a new Claude Code session. Your pages build in the background and live here:
 
 ```
 ~/.local/share/session-replay/replays/index.html
 ```
 
-Ask again whenever you want the latest sessions added. Only new and changed sessions are read, so it's quick.
+They update by themselves whenever a Claude Code session starts or ends. To update right now, type
+`/session-replay:update` or ask Claude “update my session replays”.
 
 ## What you get
 
@@ -65,7 +65,7 @@ On a phone:
 | Ask questions | — | Ask why, get a dated story with its sources |
 | GitHub | — | PRs and cloud sessions, any account |
 | Export | PDF | PDF, Excel and CSV |
-| Updates | When you ask Claude (`/session-replay:update`) | By itself after every session; settings in your browser |
+| Runs | Updates after every Claude Code session | Also runs in the background, settings in your browser |
 | Price | Free, open source (MIT) | Coming soon: one-time, early-access price |
 
 ## Pro
@@ -100,7 +100,7 @@ Ask “where are my session replays?” to see where the pages are and how many 
 - **Reads** your Claude Code transcripts in `~/.claude/projects` (or `$CLAUDE_CONFIG_DIR/projects`), read-only.
 - **Runs** `git` read-only in your project folders, to link sessions to commits and releases.
 - **Writes** pages and a cache to `~/.local/share/session-replay/` (or `$XDG_DATA_HOME/session-replay/`). Delete that folder to remove everything.
-- **Runs** only when you ask: the plugin is one skill that tells Claude to run `node src/cli.ts build` from the plugin folder. No hooks, nothing in the background.
+- **Starts** from Claude Code's SessionStart and SessionEnd hooks, and when you ask for an update. Each run is short and works in the background.
 - **Sends** nothing anywhere. There are no network calls, analytics or accounts.
 - **Hides** common secrets (API keys, tokens) before writing pages.
 
