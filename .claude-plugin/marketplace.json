@@ -1,0 +1,14 @@
+{
+  "name": "session-replay",
+  "description": "Private, searchable replays of your Claude Code sessions.",
+  "owner": {
+    "name": "nrajesh"
+  },
+  "plugins": [
+    {
+      "name": "session-replay",
+      "source": ".",
+      "description": "Private, searchable replays of your Claude Code sessions."
+    }
+  ]
+}

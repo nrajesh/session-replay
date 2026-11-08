@@ -1,0 +1,39 @@
+{
+  "name": "session-replay",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Private, searchable replays of your Claude Code sessions. Runs on your Mac; nothing leaves it.",
+  "keywords": [
+    "claude-code",
+    "session-replay",
+    "transcripts",
+    "developer-tools",
+    "local-first",
+    "privacy"
+  ],
+  "author": "nrajesh",
+  "license": "MIT",
+  "homepage": "https://github.com/nrajesh/session-replay#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nrajesh/session-replay.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nrajesh/session-replay/issues"
+  },
+  "type": "module",
+  "bin": {
+    "session-replay": "src/cli.ts"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "session-replay",
+  "displayName": "Session Replay",
+  "version": "0.1.0",
+  "description": "Private, searchable replays of your Claude Code sessions. Runs on your Mac; nothing leaves it.",
+  "author": {
+    "name": "nrajesh"
+  },
+  "homepage": "https://github.com/nrajesh/session-replay#readme",
+  "repository": "https://github.com/nrajesh/session-replay",
+  "license": "MIT",
+  "keywords": [
+    "sessions",
+    "transcripts",
+    "local-first",
+    "privacy"
+  ],
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://github.com/nrajesh/session-replay#readme",
+  "supportUrl": "https://github.com/nrajesh/session-replay/issues",
+  "privacyPolicyUrl": "https://github.com/nrajesh/session-replay#what-it-reads-writes-and-runs"
+}

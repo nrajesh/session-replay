@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+.DS_Store
+
+# Your transcripts and generated pages never belong in git.
+*.jsonl
+!test/fixtures/**/*.fixture.jsonl
+replays/
+out/
+.cache/
+*.html
+*.xlsx
+*.pdf
+*.log

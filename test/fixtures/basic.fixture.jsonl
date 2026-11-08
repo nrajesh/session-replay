@@ -1,0 +1,21 @@
+{"type":"fixture-note","synthetic":true,"note":"Hand-written synthetic transcript. Not real session content."}
+{"type":"user","sessionId":"s-basic","cwd":"/tmp/demo","gitBranch":"main","entrypoint":"claude-vscode","isSidechain":false,"timestamp":"2026-05-01T10:00:00.000Z","origin":{"kind":"human"},"promptSource":"sdk","message":{"role":"user","content":[{"type":"text","text":"<ide_opened_file>The user opened the file /tmp/demo/a.ts in the IDE.</ide_opened_file>"},{"type":"text","text":"Add a dark mode toggle to the settings page"}]}}
+{"type":"user","sessionId":"s-basic","isMeta":true,"timestamp":"2026-05-01T10:00:00.500Z","message":{"role":"user","content":"Base directory for this skill: /x"}}
+{"type":"assistant","sessionId":"s-basic","cwd":"/tmp/demo","gitBranch":"main","timestamp":"2026-05-01T10:00:05.000Z","message":{"role":"assistant","content":[{"type":"thinking","thinking":"secret reasoning"},{"type":"text","text":"I'll look at the settings page first."}]}}
+{"type":"assistant","sessionId":"s-basic","timestamp":"2026-05-01T10:00:06.000Z","message":{"role":"assistant","content":[{"type":"tool_use","id":"tu1","name":"Bash","input":{"command":"ls src","description":"List source"}}]}}
+{"type":"api-request-blob","sessionId":"s-basic","hash":"h1","message":{"role":"assistant","content":[{"type":"tool_use","id":"tu1","name":"Bash","input":{"command":"ls src"}}]}}
+{"type":"user","sessionId":"s-basic","timestamp":"2026-05-01T10:00:07.000Z","message":{"role":"user","content":[{"type":"tool_result","tool_use_id":"tu1","content":"settings.ts\napp.ts"}]},"toolUseResult":{"stdout":"settings.ts\napp.ts","stderr":""}}
+{"type":"assistant","sessionId":"s-basic","timestamp":"2026-05-01T10:01:00.000Z","message":{"role":"assistant","content":[{"type":"tool_use","id":"tu2","name":"Edit","input":{"file_path":"/tmp/demo/src/settings.ts","old_string":"a","new_string":"b"}}]}}
+{"type":"user","sessionId":"s-basic","timestamp":"2026-05-01T10:01:01.000Z","message":{"role":"user","content":[{"type":"tool_result","tool_use_id":"tu2","content":"ok"}]}}
+{"type":"assistant","sessionId":"s-basic","timestamp":"2026-05-01T10:02:00.000Z","message":{"role":"assistant","content":[{"type":"tool_use","id":"tu3","name":"Bash","input":{"command":"git commit -m 'feat: dark mode'"}}]}}
+{"type":"user","sessionId":"s-basic","timestamp":"2026-05-01T10:02:02.000Z","message":{"role":"user","content":[{"type":"tool_result","tool_use_id":"tu3","content":"[main 1a2b3c4] feat: dark mode\n 1 file changed, 2 insertions(+)"}]}}
+{"type":"user","sessionId":"s-basic","timestamp":"2026-05-01T10:03:00.000Z","origin":{"kind":"task-notification"},"promptSource":"system","message":{"role":"user","content":"<task-notification>done</task-notification>"}}
+{"type":"user","sessionId":"s-basic","timestamp":"2026-05-01T10:03:30.000Z","message":{"role":"user","content":"<command-name>/clear</command-name>"}}
+{"type":"user","sessionId":"s-basic","timestamp":"2026-05-01T10:04:00.000Z","origin":{"kind":"human"},"promptSource":"sdk","message":{"role":"user","content":"yes, go ahead and open a PR"}}
+{"type":"pr-link","sessionId":"s-basic","prNumber":12,"prUrl":"https://github.com/acme/demo/pull/12","prRepository":"acme/demo","timestamp":"2026-05-01T10:05:00.000Z"}
+{"type":"pr-link","sessionId":"s-basic","prNumber":12,"prUrl":"https://github.com/acme/demo/pull/12","prRepository":"acme/demo","timestamp":"2026-05-01T10:05:01.000Z"}
+{"type":"ai-title","sessionId":"s-basic","aiTitle":"Dark mode toggle"}
+{"type":"cost-state","sessionId":"s-basic","totalCostUSD":0.5,"totalLinesAdded":2,"totalLinesRemoved":0}
+{"type":"cost-state","sessionId":"s-basic","totalCostUSD":1.25,"totalLinesAdded":10,"totalLinesRemoved":3}
+{"type":"assistant","sessionId":"s-basic","timestamp":"2026-05-01T10:06:00.000Z","message":{"role":"assistant","content":[{"type":"text","text":"Opened PR #12."}]}}
+{"type":"user","sessionId":"s-basic","timestamp":"2026-05-01T10:0
