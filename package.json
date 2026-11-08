@@ -22,9 +22,6 @@
     "url": "https://github.com/nrajesh/session-replay/issues"
   },
   "type": "module",
-  "bin": {
-    "session-replay": "src/cli.ts"
-  },
   "engines": {
     "node": ">=24"
   },
