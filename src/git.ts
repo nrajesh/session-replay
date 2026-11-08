@@ -8,7 +8,7 @@ export type GitRunner = (cwd: string, args: string[]) => Promise<string | null>;
 
 export const defaultRunner: GitRunner = (cwd, args) =>
   new Promise((resolve) => {
-    execFile('git', args, { cwd, timeout: 10_000, maxBuffer: 64 * 1024 * 1024, env: { ...process.env, GIT_OPTIONAL_LOCKS: '0' } },
+    execFile('git', ['--no-optional-locks', ...args], { cwd, timeout: 10_000, maxBuffer: 64 * 1024 * 1024 },
       (err, stdout) => resolve(err ? null : stdout));
   });
 

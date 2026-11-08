@@ -6,7 +6,7 @@ case "$0" in
   *) bin_dir=. ;;
 esac
 plugin_root=$(CDPATH= cd -- "$bin_dir/.." && pwd)
-install_hint='Install it from https://nodejs.org (or run: brew install node), then start a new Claude Code session.'
+install_hint='Install it with Homebrew (brew install node) or from the Node.js website, then start a new Claude Code session.'
 
 if ! command -v node >/dev/null 2>&1; then
   echo "Session Replay needs Node.js 24 or newer, and it was not found. $install_hint" >&2

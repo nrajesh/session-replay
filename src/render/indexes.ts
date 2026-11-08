@@ -158,7 +158,7 @@ export function monthCards(p: ProjectPage, pro: boolean): { month: string; sessi
 
 /** A whole card is one link; grouped PRs get their own small links (no nested anchors). */
 function cardHtml(c: Card): string {
-  const ext = c.href && /^https:/.test(c.href) ? ' rel="noreferrer"' : '';
+  const ext = c.href?.startsWith('https:') ? ' rel="noreferrer"' : '';
   const when = c.links && c.links.length > 1
     ? `<div class="when">PR ${c.links.map((l, i) => `<a href="${esc(l.href)}" rel="noreferrer"${c.linkPeeks?.[i] ?? ''}>${esc(l.label)}</a>`).join(', ')}</div>`
     : `<div class="when">${esc(c.when)}</div>`;

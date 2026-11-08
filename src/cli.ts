@@ -114,7 +114,6 @@ async function runHook() {
   const child = spawn(process.execPath, [fileURLToPath(import.meta.url), 'build', '--quiet', '--out', out], {
     detached: true,
     stdio: ['ignore', fd, fd],
-    env: process.env,
   });
   child.on('error', (e) => {
     try { console.error(`Session Replay hook could not start the background build: ${e.message}`); } catch {}
