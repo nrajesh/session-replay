@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 // session-replay command line. Run `node src/cli.ts help` for usage.
 import { homedir } from 'node:os';
 import { join } from 'node:path';
@@ -26,7 +25,6 @@ Commands
   config             Show settings (Claude folder, output folder, archive days…)
   config set K V     Change one setting, e.g. config set projectsDir ~/work/.claude/projects
   status             Show where pages are and how many sessions they hold
-  hook               (used by Claude Code itself; reads the session from stdin)
 
 Open the index.html path shown by build or status in your browser.`;
 
@@ -77,49 +75,6 @@ function printReport(r: BuildReport) {
   console.log(lines.join('\n'));
 }
 
-async function readStdin(timeoutMs: number): Promise<string> {
-  if (process.stdin.isTTY) return '';
-  return new Promise((resolve) => {
-    let data = '';
-    const done = () => resolve(data);
-    const t = setTimeout(done, timeoutMs);
-    process.stdin.setEncoding('utf8');
-    process.stdin.on('data', (c) => (data += c));
-    process.stdin.on('end', () => { clearTimeout(t); done(); });
-    process.stdin.on('error', () => { clearTimeout(t); done(); });
-  });
-}
-
-/** Called by Claude Code hooks: start a background build and return at once. */
-async function runHook() {
-  const raw = await readStdin(1000);
-  let event: { hook_event_name?: unknown; transcript_path?: unknown } | undefined;
-  try {
-    event = JSON.parse(raw);
-  } catch {}
-  const transcript = event?.transcript_path;
-  const hookEvent = event?.hook_event_name;
-  if (typeof transcript !== 'string' || !existsSync(transcript)) return;
-  const out = outDir();
-  if (hookEvent === 'SessionStart' && existsSync(join(out, 'index.html'))) return;
-  if (hookEvent !== 'SessionStart' && hookEvent !== 'SessionEnd') return;
-  // SessionStart bootstraps the index once; SessionEnd catches up on missed events
-  // (crash, chat left open) and processes the session that just ended.
-  mkdirSync(out, { recursive: true });
-  const log = join(out, '.log');
-  try {
-    if (statSync(log).size > 1_000_000) truncateSync(log, 0);
-  } catch {}
-  const fd = openSync(log, 'a');
-  const child = spawn(process.execPath, [fileURLToPath(import.meta.url), 'build', '--quiet', '--out', out], {
-    detached: true,
-    stdio: ['ignore', fd, fd],
-  });
-  child.on('error', (e) => {
-    try { console.error(`Session Replay hook could not start the background build: ${e.message}`); } catch {}
-  });
-  child.unref();
-}
 
 export async function main(argv: string[]): Promise<number> {
   let parsed: Parsed;
@@ -172,11 +127,6 @@ export async function main(argv: string[]): Promise<number> {
       console.log(`Removed ${id} from the archive. Run: session-replay build`);
       return 0;
     }
-    case 'hook':
-      try { await runHook(); } catch (e) {
-        console.error(`Session Replay hook failed: ${(e as Error).message}`);
-      }
-      return 0;
     case 'status': {
       const out = outDir(opts.out);
       const st = loadState(out);
@@ -188,7 +138,7 @@ export async function main(argv: string[]): Promise<number> {
       const lines = [
         `Pages:            ${join(out, 'index.html')}${existsSync(join(out, 'index.html')) ? '' : ' (not built yet: run build)'}`,
         `Sessions known:   ${Object.keys(st.sessions).length}`,
-        'Automatic update: when a Claude Code session starts or ends',
+        'Updates:          when you ask Claude (/session-replay:update)',
         `History kept by Claude Code: ${cleanup}`,
         `Archive kept for: ${cfg().archiveDays ? `${cfg().archiveDays} days` : 'forever'}`,
         `Claude transcripts: ${projectRoots().join(', ')}`,

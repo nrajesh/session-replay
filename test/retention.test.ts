@@ -33,7 +33,7 @@ test('a recent loss with a long Claude Code period says deleted from disk; free 
   await build({ projectsRoot: root, out, run: noGit, log: quiet, claudeHistoryDays: 3650 });
   const page = readFileSync(join(out, 'demo', `${U1}.html`), 'utf8');
   assert.match(page, /deleted from disk/);
-  assert.match(page, new RegExp(`session-replay forget ${U1}`));
+  assert.match(page, new RegExp(`remove session <code>${U1}</code> from Session Replay`));
   assert.doesNotMatch(page, /id="forget-session"/);
 });
 

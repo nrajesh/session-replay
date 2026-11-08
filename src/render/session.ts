@@ -189,7 +189,7 @@ export function sourceGoneHtml(s: Pick<SessionModel, 'id'>, ctx: Pick<SessionCtx
   }
   const why = ctx.sourceGone === 'cleanup' ? 'Claude Code’s cleanup removed the original.' : 'The original was deleted from disk.';
   const chip = `<span class="chip plain gone" tabindex="0"${peekAttr({ h: 'Source removed', s: why, g: 'This copy stays in your archive' })}>Source removed</span>`;
-  let action = `<span>To remove it, ask Claude Code to run <code>session-replay forget ${esc(s.id)}</code>.</span>`;
+  let action = `<span>To remove it, ask Claude to remove session <code>${esc(s.id)}</code> from Session Replay.</span>`;
   return { chip, notice: `<p class="warnline source-gone" id="source-gone"><span id="source-gone-text">${esc(why)} This copy stays in your archive.</span> ${action}</p>` };
 }
 

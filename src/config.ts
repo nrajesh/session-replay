@@ -2,6 +2,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { homedir } from 'node:os';
 import { writeFileAtomic } from './fsutil.ts';
 
 export interface Config {
@@ -23,7 +24,16 @@ const KEYS = [
 ] as const;
 type Key = (typeof KEYS)[number];
 
-export const DEFAULT_OUT = fileURLToPath(new URL('../replays', import.meta.url));
+/** Where pages go unless set: Pro keeps them beside the app; Free uses the user's data folder (never the plugin folder, which updates replace). */
+function defaultOut(): string {
+  return dataHomeOut(process.env);
+}
+export const DEFAULT_OUT = defaultOut();
+
+/** The user's data folder for pages: $XDG_DATA_HOME, else ~/.local/share. */
+export function dataHomeOut(env: Env): string {
+  return join(env.XDG_DATA_HOME || join(env.HOME ?? homedir(), '.local', 'share'), 'session-replay', 'replays');
+}
 
 export function configPath(env: Env = process.env): string {
   return env.SESSION_REPLAY_CONFIG ?? join(env.HOME ?? '', '.config', 'session-replay', 'config.json');

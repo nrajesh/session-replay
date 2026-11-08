@@ -6,7 +6,6 @@ import { join } from 'node:path';
 import { build } from '../src/build.ts';
 import { monthsBetween } from '../src/client/calendar.js';
 import { redact } from '../src/redact.ts';
-import { installHook } from '../src/hook.ts';
 import { parseSession } from '../src/parse.ts';
 import { indexData } from '../src/render/indexes.ts';
 import { emptySession } from '../src/parse.ts';
@@ -44,14 +43,7 @@ test('#2 common password and credential forms are redacted', () => {
   }
 });
 
-test('#3 install-hook repairs a hook whose command changed (e.g. after a Node upgrade)', () => {
-  const f = join(tempDir(), 'settings.json');
-  installHook(f, '"/old/node" "/x/session-replay/src/cli.ts" hook');
-  const r = installHook(f, '"/new/node" "/x/session-replay/src/cli.ts" hook');
-  assert.equal(r.changed, true);
-  const cmds = JSON.parse(readFileSync(f, 'utf8')).hooks.SessionEnd.flatMap((m: any) => m.hooks.map((h: any) => h.command));
-  assert.deepEqual(cmds, ['"/new/node" "/x/session-replay/src/cli.ts" hook']);
-});
+
 
 test('#4 a question still open when the session ended is kept with no answer', async () => {
   const f = join(tempDir(), 'open.jsonl');

@@ -19,13 +19,14 @@ In Claude Code, run:
 /plugin install session-replay@session-replay
 ```
 
-Then start a new Claude Code session. Your pages build in the background. Open them in your browser:
+Then build your pages: type `/session-replay:update` in Claude Code, or just ask “update my session replays”.
+Claude runs the builder and gives you the link. Your pages live here:
 
 ```
 ~/.local/share/session-replay/replays/index.html
 ```
 
-They update by themselves whenever a Claude Code session starts or ends. To update now, type `/session-replay:build` in Claude Code.
+Ask again whenever you want the latest sessions added. Only new and changed sessions are read, so it's quick.
 
 ## What you get
 
@@ -64,7 +65,7 @@ On a phone:
 | Ask questions | — | Ask why, get a dated story with its sources |
 | GitHub | — | PRs and cloud sessions, any account |
 | Export | PDF | PDF, Excel and CSV |
-| Runs | Updates when a Claude Code session starts or ends | Also runs in the background, settings in your browser |
+| Updates | When you ask Claude (`/session-replay:update`) | By itself after every session; settings in your browser |
 | Price | Free, open source (MIT) | Coming soon: one-time, early-access price |
 
 ## Pro
@@ -73,21 +74,21 @@ Pro is coming soon, with a one-time price and an early-access discount. Want it?
 
 ## Settings
 
-Most people never need these. To change one, ask Claude Code to run it, for example: “run `session-replay config set theme dark`”.
+Most people never need these. To change one, ask Claude, for example: “set my Session Replay theme to dark”.
 
 <details>
 <summary>All settings</summary>
 
-| Setting | What it does | Example |
+| Setting | What it does | Ask Claude |
 |---|---|---|
-| `theme` | Light, dark or follow your Mac | `config set theme dark` |
-| `archiveDays` | How long to keep sessions (0 = forever) | `config set archiveDays 365` |
-| `excludeProjects` | Projects to leave out | `config set excludeProjects scratch, demo` |
-| `includeProjects` | Only show these projects | `config set includeProjects my-app` |
-| `extraRedactions` | Extra text to hide, as patterns | `config set extraRedactions acme-[0-9]+` |
-| `projectsDir` | A different Claude Code projects folder | `config set projectsDir ~/work/.claude/projects` |
+| `theme` | Light, dark or follow your Mac | “set my Session Replay theme to dark” |
+| `archiveDays` | How long to keep sessions (0 = forever) | “keep Session Replay sessions for 365 days” |
+| `excludeProjects` | Projects to leave out | “leave the scratch project out of Session Replay” |
+| `includeProjects` | Only show these projects | “only show my-app in Session Replay” |
+| `extraRedactions` | Extra text to hide, as patterns | “hide text matching acme-[0-9]+ in Session Replay” |
+| `projectsDir` | A different Claude Code projects folder | “use ~/work/.claude/projects for Session Replay” |
 
-`session-replay status` shows where your pages are and how many sessions they hold. The `session-replay` command works inside Claude Code, where the plugin adds it.
+Ask “where are my session replays?” to see where the pages are and how many sessions they hold.
 
 </details>
 
@@ -99,7 +100,7 @@ Most people never need these. To change one, ask Claude Code to run it, for exam
 - **Reads** your Claude Code transcripts in `~/.claude/projects` (or `$CLAUDE_CONFIG_DIR/projects`), read-only.
 - **Runs** `git` read-only in your project folders, to link sessions to commits and releases.
 - **Writes** pages and a cache to `~/.local/share/session-replay/` (or `$XDG_DATA_HOME/session-replay/`). Delete that folder to remove everything.
-- **Starts** from Claude Code's SessionStart and SessionEnd hooks. Each run is short and works in the background.
+- **Runs** only when you ask: the plugin is one skill that tells Claude to run `node src/cli.ts build` from the plugin folder. No hooks, nothing in the background.
 - **Sends** nothing anywhere. There are no network calls, analytics or accounts.
 - **Hides** common secrets (API keys, tokens) before writing pages.
 

@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { loadConfig, setConfigValue } from '../src/config.ts';
+import { loadConfig, setConfigValue, dataHomeOut } from '../src/config.ts';
 import { tempDir } from './helpers.ts';
 
 test('defaults when no file exists', () => {
@@ -73,3 +73,8 @@ test('the old lookbackDays name still works, and archiveDays wins when both are 
 });
 
 
+
+test('free pages default to the user data folder, never the plugin folder', () => {
+  assert.equal(dataHomeOut({ XDG_DATA_HOME: '/d', HOME: '/h' }), '/d/session-replay/replays');
+  assert.equal(dataHomeOut({ HOME: '/h' }), '/h/.local/share/session-replay/replays');
+});

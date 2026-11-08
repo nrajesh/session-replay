@@ -30,12 +30,7 @@ test('unknown command prints help and fails', () => {
   assert.match(r.stdout + r.stderr, /Usage/);
 });
 
-test('pages default to replays/ inside the project folder, which git ignores', async () => {
-  const { DEFAULT_OUT } = await import('../src/cli.ts');
-  assert.equal(DEFAULT_OUT, new URL('../replays', import.meta.url).pathname);
-  const r = spawnSync('git', ['check-ignore', '-q', 'replays/index.html'], { cwd: new URL('..', import.meta.url).pathname });
-  assert.equal(r.status, 0);
-});
+
 
 test('forget removes a session whose original file is gone, and refuses one that still exists', () => {
   const id = '11111111-1111-4111-8111-111111111111';
