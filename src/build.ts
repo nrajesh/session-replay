@@ -65,7 +65,7 @@ export interface MemoryNote { file: string; name: string; description: string; t
 
 const MEMORY_MAX_FILES = 40;
 const MEMORY_MAX_CHARS = 4000;
-const RENDER_VERSION = 97;
+const RENDER_VERSION = 98;
 
 
 export function slugify(name: string): string {

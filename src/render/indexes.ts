@@ -440,7 +440,7 @@ const INDEX_JS = `
         if(r.kind==='cloud')cloud++;else local++;
         if(r.testsPct!=null)tn++;});
       document.getElementById('day-title').textContent=MONTH_NAMES[+st.month.slice(5,7)-1]+' '+st.month.slice(0,4)+(all&&!st.project?' · all projects':st.project?' · '+st.project:'');
-      document.getElementById('day-sum').textContent=tot+' sessions · '+Math.round(tm/60)+' h active · '+tc+' commits'+(D.pro?' · '+local+' local · '+cloud+' cloud':'')+(tn?' · '+tn+' tested':(cloud?' · (cloud sessions have no test data)':''));
+      document.getElementById('day-sum').textContent=tot+' session'+(tot===1?'':'s')+' · '+Math.round(tm/60)+' h active · '+tc+' commit'+(tc===1?'':'s')+(D.pro?' · '+local+' local · '+cloud+' cloud':'')+(tn?' · '+tn+' tested':(cloud?' · (cloud sessions have no test data)':''));
       document.getElementById('day-list').innerHTML='';
       dayButtons();
       return;
@@ -448,7 +448,7 @@ const INDEX_JS = `
     st.lastDay=st.day;dayButtons();
     var evs=dayEvents(),s={},c=0,dn=0;evs.forEach(function(x){s[x.r.id]=1;if(x.ev.type==='commit')c++;if(x.ev.type==='decision')dn++;});
     document.getElementById('day-title').textContent=new Date(st.day+'T12:00:00').toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short',year:'numeric'})+(all&&!st.project?' · all projects':st.project?' · '+st.project:'');
-    document.getElementById('day-sum').textContent=Object.keys(s).length+' sessions · '+c+' commits · '+dn+' decisions';
+    document.getElementById('day-sum').textContent=(function(n,w){return n+' '+w+(n===1?'':'s');})(Object.keys(s).length,'session')+' · '+c+' commit'+(c===1?'':'s')+' · '+dn+' decision'+(dn===1?'':'s');
     document.getElementById('day-list').innerHTML=evs.length?evs.map(function(x){var ev=x.ev,r=x.r;
       var tag=ev.type==='decision'?'<span style="color:var(--you)">'+(ev.exact?'You decided':'You said · best-effort')+'</span> · ':ev.type==='commit'?'<span style="color:var(--agent)">Commit</span> ':'Session started · ';
       return '<li><span class="cp-time">'+e(ft(ev.at))+'</span><span class="proj muted">'+e(r.project)+'</span><span>'+tag+'<a href="'+e(r.href)+'"'+peek(r)+'>'+e(ev.type==='start'?(r.short||r.title):ev.text)+'</a></span></li>';}).join(''):'<li class="empty">Nothing recorded on this day.</li>';

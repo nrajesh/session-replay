@@ -1,6 +1,6 @@
 {
   "name": "session-replay",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "Private, searchable replays of your Claude Code sessions. Runs on your Mac; nothing leaves it.",
   "keywords": [

@@ -2,7 +2,10 @@
 
 Private, searchable replays of your Claude Code sessions. Find the prompt, decision or commit behind any change, in any project.
 
-![A session replay: the tape, checkpoints, your decisions, tests and commits](docs/screenshots/session.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/demo-dark.gif">
+  <img src="docs/screenshots/demo-light.gif" alt="Stepping along a session's tape, opening a checkpoint, then searching all sessions with a typo">
+</picture>
 
 > [!IMPORTANT]
 > Needs Node.js 24 or newer. Check with `node --version`. To install it, go to [nodejs.org](https://nodejs.org) or run `brew install node`.
@@ -38,6 +41,10 @@ They update by themselves whenever a Claude Code session starts or ends. To upda
 
 <details>
 <summary>More screenshots</summary>
+
+A session replay: the tape, checkpoints, your decisions, tests and commits:
+
+![A session replay: the tape, checkpoints, your decisions, tests and commits](docs/screenshots/session.png)
 
 All sessions, with search and the activity chart:
 
