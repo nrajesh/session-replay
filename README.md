@@ -31,6 +31,10 @@ Then start a new Claude Code session. Your pages build in the background and liv
 They update by themselves whenever a Claude Code session starts or ends. To update right now, type
 `/session-replay:update` or ask Claude “update my session replays”.
 
+### The edition in Anthropic's directory
+
+Anthropic's directory lists a smaller edition, kept in [`directory/`](directory/). It contains instructions and a page template, and no program: Claude builds a replay page for one session when you ask. The install above is the full edition, with pages for every session, search, the calendar and usage. If both are installed, the directory edition uses the full one.
+
 ## What you get
 
 - **Search everything.** Prompts, decisions, commits and files across all your projects, typos and all.

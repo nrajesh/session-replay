@@ -1,0 +1,22 @@
+{
+  "name": "session-replay",
+  "displayName": "Session Replay",
+  "version": "0.3.0",
+  "description": "Turn a Claude Code session into a private replay page: your prompts, decisions, tests and commits, in order.",
+  "author": {
+    "name": "nrajesh"
+  },
+  "homepage": "https://github.com/nrajesh/session-replay#readme",
+  "repository": "https://github.com/nrajesh/session-replay",
+  "license": "MIT",
+  "keywords": [
+    "sessions",
+    "transcripts",
+    "replay",
+    "history"
+  ],
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://github.com/nrajesh/session-replay/tree/main/directory#readme",
+  "supportUrl": "https://github.com/nrajesh/session-replay/issues",
+  "privacyPolicyUrl": "https://github.com/nrajesh/session-replay/tree/main/directory#what-it-reads-writes-and-runs"
+}
